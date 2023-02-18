@@ -15,15 +15,15 @@ def home():
 def addinvoice(): 
          
     if request.method == 'POST':
-        # return render_template("home.html")
+        
+        
+        customername = request.form.get('customername')
+        customeraddress = request.form.get('customeraddress')
+        date = request.form.get('date')       
+        description = request.form.get('desp')
+        invoiceno = request.form.get('invoiceno')
+        invoicetotal = request.form.get('invoicetotal')
         flash('Invoice added!', category='greenlight')
-        # customername = request.form.get('customername')
-        # customeraddress = request.form.get('customeraddress')
-        # date = request.form.get('date')       
-        # description = request.form.get('desp')
-        # invoiceno = request.form.get('invoiceno')
-        # invoicetotal = request.form.get('invoicetotal')
-        # flash('Invoice added!', category='greenlight')
     #     error = db_func.validate_invoice_form(customername, customeraddress, date, description, invoiceno, invoicetotal)
     #     if error is not None:
     #         flash(error, category='redlight')
