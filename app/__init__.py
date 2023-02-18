@@ -37,11 +37,11 @@ def addinvoice():
     return render_template("Form.html")
 
 
-# @app.route('/viewinvoice')
-# def viewinvoice():
+@app.route('/viewinvoice')
+def viewinvoice():
     
 #     invoices = db_func.run_query('SELECT * FROM invoice')
-#     return render_template("invoice.html", invoices=invoices)        # Pass data to HTML template for display
+      return render_template("invoice.html")#, invoices=invoices)        # Pass data to HTML template for display
           
           
 # @app.route('/editinvoice/<int:invoice_id>', methods=['GET', 'POST'])
