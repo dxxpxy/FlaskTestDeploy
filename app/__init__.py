@@ -15,6 +15,7 @@ def home():
 def addinvoice(): 
          
     if request.method == 'POST':
+        return render_template("home.html")
         flash('Invoice added!', category='greenlight')
         customername = request.form.get('customername')
         customeraddress = request.form.get('customeraddress')
