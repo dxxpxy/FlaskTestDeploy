@@ -4,7 +4,7 @@ from datetime import datetime
 #import db_func
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'your-secret-key'
 
 @app.route('/')
 def home():
