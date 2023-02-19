@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, flash, redirect
 #import sqlite3
 from datetime import datetime
-from db_func import *
+#from db_func import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
