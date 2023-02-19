@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'your-secret-key'
 @app.route('/',  methods=['GET','POST'])
 def home():
     return render_template("home.html")
-    return
+    
 
 # @app.route('/addinvoice', methods = ['GET', 'POST'])
 # def addinvoice(): 
