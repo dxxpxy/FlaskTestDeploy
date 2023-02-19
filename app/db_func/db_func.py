@@ -36,11 +36,11 @@ def run_query(sql):
 
 
 def execute_sql(sql, *args):
-    connection = get_db()
-    cur = connection.cursor()
+    conn = get_db()
+    cur = conn.cursor()
     cur.execute(sql, args)
-    connection.commit()
-    connection.close()
+    conn.commit()
+    conn.close()
 
 
 def validate_invoice_form(customername, customeraddress, date, description, invoiceno, invoicetotal):

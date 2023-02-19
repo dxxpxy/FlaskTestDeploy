@@ -2,6 +2,7 @@ from flask import Flask, Blueprint, render_template, request, flash, redirect
 #import sqlite3
 from datetime import datetime
 from db_func import *
+import os 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -15,8 +16,7 @@ def home():
 def addinvoice(): 
          
     if request.method == 'POST':
-        
-        
+                
         customername = request.form.get('customername')
         customeraddress = request.form.get('customeraddress')
         date = request.form.get('date')       
@@ -24,6 +24,7 @@ def addinvoice():
         invoiceno = request.form.get('invoiceno')
         invoicetotal = request.form.get('invoicetotal')
         #flash('Invoice added!', category='greenlight')
+        
         error = db_func.validate_invoice_form(customername, customeraddress, date, description, invoiceno, invoicetotal)
         if error is not None:
             flash(error, category='redlight')
