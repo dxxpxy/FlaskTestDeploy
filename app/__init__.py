@@ -23,7 +23,7 @@ def addinvoice():
         description = request.form.get('desp')
         invoiceno = request.form.get('invoiceno')
         invoicetotal = request.form.get('invoicetotal')
-        flash('Invoice added!', category='greenlight')
+        #flash('Invoice added!', category='greenlight')
         error = db_func.validate_invoice_form(customername, customeraddress, date, description, invoiceno, invoicetotal)
         if error is not None:
             flash(error, category='redlight')
@@ -41,7 +41,7 @@ def addinvoice():
 def viewinvoice():
     
     invoices = db_func.run_query('SELECT * FROM invoice')
-    return render_template("invoice.html")#, invoices=invoices)        # Pass data to HTML template for display
+    return render_template("invoice.html", invoices=invoices)        # Pass data to HTML template for display
           
           
 @app.route('/editinvoice/<int:invoice_id>', methods=['GET', 'POST'])

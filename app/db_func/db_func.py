@@ -1,16 +1,16 @@
 import sqlite3
 
 def get_db():
-    connection = sqlite3.connect('Website1/invoices.db')
+    connection = sqlite3.connect('invoices.db')
     return connection
 
 
 def check_db_exist():
-    connection = sqlite3.connect('Website1/invoices.db')
+    connection = sqlite3.connect('invoices.db')
     cursor = connection.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
     if not cursor.fetchall():
-        script = open('Website1/schema.sql').read()
+        script = open('schema.sql').read()
         connection.executescript(script)
         connection.close()
 
