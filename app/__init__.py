@@ -1,12 +1,12 @@
 from flask import Flask, Blueprint, render_template, request, flash, redirect
 import sqlite3
 from datetime import datetime
-import db_func
+from db_func import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 
-@app.route('/')
+@app.route('/',  methods=['GET','POST'])
 def home():
     return render_template("home.html")
 
@@ -28,10 +28,10 @@ def addinvoice():
         if error is not None:
             flash(error, category='redlight')
         else:
-            date_obj = datetime.strptime(date, '%Y-%m-%d')  # Convert the string to a datetime object
-            date_formatted = date_obj.strftime('%d/%m/%y')  # Convert the datetime object to a formatted string         
-            db_func.check_db_exist()
-            db_func.execute_sql('INSERT INTO invoice (customername, customeraddress, date, description, invoiceno, invoicetotal) VALUES (?, ?, ?, ?, ?, ?)', customername, customeraddress, date_formatted, description, invoiceno, invoicetotal)
+            #date_obj = datetime.strptime(date, '%Y-%m-%d')  # Convert the string to a datetime object
+            #date_formatted = date_obj.strftime('%d/%m/%y')  # Convert the datetime object to a formatted string         
+            #db_func.check_db_exist()
+            db_func.execute_sql('INSERT INTO invoice (customername, customeraddress, date, description, invoiceno, invoicetotal) VALUES (?, ?, ?, ?, ?, ?)', customername, customeraddress, date, description, invoiceno, invoicetotal)
             flash('Invoice added!', category='greenlight')
           
     return render_template("Form.html")
@@ -47,11 +47,11 @@ def viewinvoice():
 @app.route('/editinvoice/<int:invoice_id>', methods=['GET', 'POST'])
 def editinvoice(invoice_id):
     # Connect to database and retrieve invoice data
-    connection = sqlite3.connect('invoices.db')
-    cursor = connection.cursor()
+    conn = db_func.get_db()
+    cursor = conn.cursor()
     cursor.execute('SELECT * FROM invoice WHERE id = ?', (invoice_id,))
     invoice = cursor.fetchone()
-    connection.close()
+    conn.close()
 
     if request.method == 'POST':
         # Retrieve new invoice total from form data

@@ -1,35 +1,45 @@
 import sqlite3
+import pyodbc
+
+server = 'flaskwebapp-db-server.database.windows.net'
+database = 'FlaskWebAppDB'
+username = 'gyodicvvja@flaskwebapp-db-server.database.windows.net'
+password = 'JDVY5MHFF6B3X433$'
+driver= '{ODBC Driver 18 for SQL Server}'
+
+conn_str = f"DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+
 
 def get_db():
-    connection = sqlite3.connect('invoices.db')
-    return connection
+    conn = pyodbc.connect(conn_str)
+    return conn
 
 
 def check_db_exist():
-    connection = sqlite3.connect('invoices.db')
-    cursor = connection.cursor()
+    conn = pyodbc.connect(conn_str)
+    cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
     if not cursor.fetchall():
         script = open('schema.sql').read()
-        connection.executescript(script)
-        connection.close()
+        conn.executescript(script)
+        conn.close()
 
 
 def run_query(sql):
-    connection = get_db()
-    cursor = connection.cursor()
+    conn = get_db()
+    cursor = conn.cursor()
     cursor.execute(sql)
     results = cursor.fetchall()
-    connection.close()
+    conn.close()
     return results
 
 
 def execute_sql(sql, *args):
-    connection = get_db()
-    cur = connection.cursor()
+    conn = get_db()
+    cur = conn.cursor()
     cur.execute(sql, args)
-    connection.commit()
-    connection.close()
+    conn.commit()
+    conn.close()
 
 
 def validate_invoice_form(customername, customeraddress, date, description, invoiceno, invoicetotal):

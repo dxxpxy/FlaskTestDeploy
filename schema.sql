@@ -2,13 +2,11 @@ DROP TABLE IF EXISTS invoice;
 
 CREATE TABLE invoice 
 (
-    "id"	INTEGER,
-	"customername"	TEXT NOT NULL,
-	"customeraddress"	TEXT NOT NULL,
-	"date"	TEXT NOT NULL,
-	"description"	TEXT NOT NULL,
-	"invoiceno"	INTEGER NOT NULL,
-	"invoicetotal"	INTEGER,
-    PRIMARY KEY("id" AUTOINCREMENT)
-    
+    "id"	INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	"customername"	NVARCHAR(255) NOT NULL,
+	"customeraddress"	NVARCHAR(255) NOT NULL,
+	"date"	DATE NOT NULL,
+	"description"	NVARCHAR(255) NOT NULL,
+	"invoiceno"	INT NOT NULL,
+	"invoicetotal"	INT,
 );
