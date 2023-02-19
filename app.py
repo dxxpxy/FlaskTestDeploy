@@ -6,7 +6,7 @@ from db_func import *
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 
-@app.route('/',  methods=['GET','POST'])
+@app.route('/')
 def home():
     return render_template("home.html")
 
