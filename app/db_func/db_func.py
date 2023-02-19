@@ -1,6 +1,6 @@
 #import sqlite3
 import pyodbc
-
+#import os 
 server = 'flaskwebapp-db-server.database.windows.net'
 database = 'FlaskWebAppDB'
 username = 'gyodicvvja@flaskwebapp-db-server.database.windows.net'
